@@ -1,0 +1,100 @@
+/* Modern Tools Page */
+
+.tools-page {
+    padding-top: var(--space-xl);
+}
+
+.page-title {
+    font-size: var(--font-size-4xl);
+    text-align: center;
+    margin-bottom: var(--space-xs);
+    letter-spacing: -0.03em;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-family: var(--font-family-display);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+}
+
+.tools-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Floating Tab Bar */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    background: var(--color-surface);
+    padding: var(--space-sm);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-display);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.tab:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-tertiary);
+}
+
+.tab.active {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    box-shadow: 0 4px 15px rgba(204, 255, 0, 0.3);
+}
+
+.tab-icon {
+    font-size: 1.25rem;
+}
+
+/* Tool Content Area */
+.tool-content {
+    background: var(--color-bg-primary);
+    /* Remove card bg for cleaner look */
+    border-radius: var(--radius-xl);
+    /* The individual tools will be cards themselves, or we can wrap them here */
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        width: 100%;
+        border-radius: var(--radius-lg);
+        justify-content: space-between;
+    }
+
+    .tab {
+        flex: 1;
+        padding: var(--space-md) var(--space-sm);
+        justify-content: center;
+    }
+
+    .tab span:not(.tab-icon) {
+        display: none;
+        /* Icon only on mobile */
+    }
+}

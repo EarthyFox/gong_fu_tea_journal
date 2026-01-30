@@ -1,0 +1,170 @@
+.timer-tool {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+}
+
+/* Timer Display */
+.timer-display-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.timer-display {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-circle-bg {
+    fill: none;
+    stroke: var(--color-surface);
+    stroke-width: 8;
+}
+
+.timer-circle-progress {
+    fill: none;
+    stroke: url(#timer-gradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.timer-time {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-shadow: 0 0 20px rgba(127, 176, 105, 0.3);
+}
+
+.timer-controls {
+    display: flex;
+    gap: var(--space-md);
+}
+
+/* Presets */
+.timer-presets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.timer-presets h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+}
+
+.preset-group {
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+}
+
+.preset-group h4 {
+    font-size: var(--font-size-lg);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.preset-btn {
+    font-size: var(--font-size-sm);
+    padding: var(--space-sm) var(--space-md);
+}
+
+/* Custom Timer */
+.custom-timer {
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+}
+
+.custom-timer h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+}
+
+.custom-timer-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.custom-time-input {
+    max-width: 120px;
+}
+
+/* History */
+.steep-history {
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+}
+
+.steep-history h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .timer-display {
+        width: 200px;
+        height: 200px;
+    }
+
+    .timer-time {
+        font-size: var(--font-size-3xl);
+    }
+
+    .preset-buttons {
+        flex-direction: column;
+    }
+
+    .preset-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,219 @@
+.meditation-tool {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+}
+
+/* Meditation Header */
+.meditation-header {
+    text-align: center;
+}
+
+.meditation-header h2 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
+}
+
+.meditation-header p {
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+/* Technique Selector */
+.technique-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+}
+
+.technique-card {
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: left;
+}
+
+.technique-card:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.technique-card.selected {
+    border-color: var(--color-primary);
+    background: var(--color-surface-active);
+}
+
+.technique-card:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.technique-name {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.technique-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Breathing Visualizer */
+.breathing-visualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-3xl) var(--space-xl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.breathing-circle-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breathing-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.breathing-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+}
+
+.phase-name {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-display);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.phase-timer {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-display);
+}
+
+.breathing-controls {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.btn-large {
+    padding: var(--space-md) var(--space-2xl);
+    font-size: var(--font-size-lg);
+}
+
+/* Meditation Stats */
+.meditation-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-md);
+}
+
+.stat-value {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-family: var(--font-family-display);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+/* Meditation Tips */
+.meditation-tips {
+    padding: var(--space-xl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.meditation-tips h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+}
+
+.meditation-tips ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.meditation-tips li {
+    padding-left: var(--space-lg);
+    position: relative;
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+.meditation-tips li::before {
+    content: '•';
+    position: absolute;
+    left: var(--space-sm);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 768px) {
+    .technique-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .breathing-circle-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .phase-name {
+        font-size: var(--font-size-2xl);
+    }
+
+    .meditation-stats {
+        grid-template-columns: 1fr;
+    }
+}

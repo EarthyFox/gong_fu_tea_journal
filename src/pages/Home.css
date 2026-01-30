@@ -1,0 +1,166 @@
+/* Neo-Modern Home Styling */
+
+.home-page {
+    /* No padding top because hero handles it */
+    padding-top: 0;
+}
+
+/* Hero Section - Bold & Impactful */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 30%, rgba(204, 255, 0, 0.05) 0%, transparent 70%);
+}
+
+/* Background Noise/Grid Effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    z-index: -1;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-lg);
+    line-height: 0.9;
+}
+
+.hero-title span.text-primary {
+    display: block;
+    color: var(--color-primary);
+    text-shadow: 0 0 40px rgba(204, 255, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    max-width: 600px;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    margin-bottom: var(--space-2xl);
+    border-left: 2px solid var(--color-primary);
+    padding-left: var(--space-md);
+    text-align: left;
+    /* Center align on mobile but keep left bar? No, sticking to centered layout with text-align left looks techy */
+    display: inline-block;
+    text-align: left;
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+/* Features - Card Grid */
+.features {
+    padding: var(--space-3xl) var(--space-lg);
+}
+
+.section-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-2xl);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--font-size-sm);
+    /* Using small label style for section header */
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-md);
+    display: inline-block;
+}
+
+.feature-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 40px -10px rgba(204, 255, 0, 0.1);
+}
+
+.feature-card::after {
+    content: '→';
+    position: absolute;
+    top: var(--space-xl);
+    right: var(--space-xl);
+    font-size: var(--font-size-xl);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+    color: var(--color-primary);
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+    background: var(--color-bg-tertiary);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    transform: rotate(-10deg);
+}
+
+.feature-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+}
+
+.feature-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-subtitle {
+        text-align: center;
+        border-left: none;
+        border-top: 2px solid var(--color-primary);
+        padding-left: 0;
+        padding-top: var(--space-md);
+    }
+}

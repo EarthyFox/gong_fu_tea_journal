@@ -1,0 +1,325 @@
+/* Neo-Tea Lab Design System */
+
+/* CSS Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Palette - Neo/Cyber Aesthetic */
+  --color-bg-primary: #0f1110;
+  --color-bg-secondary: #000000;
+  --color-bg-tertiary: #1a1c1b;
+
+  --color-surface: #181a19;
+  --color-surface-hover: #222423;
+  --color-surface-active: #2a2c2b;
+
+  /* Electric Accents */
+  --color-primary: #ccff00;
+  /* Acid Green */
+  --color-primary-dim: #a3cc00;
+  --color-primary-glow: rgba(204, 255, 0, 0.4);
+
+  --color-secondary: #ffffff;
+  --color-secondary-dim: #a0a0a0;
+
+  --color-accent: #00f0ff;
+  /* Cyber Blue for secondary actions */
+
+  /* Text Colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #888888;
+  --color-text-tertiary: #444444;
+  --color-text-inverse: #000000;
+
+  /* Borders */
+  --border-color: #333333;
+  --border-width: 1px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+  --font-family-display: 'Space Grotesk', sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-4xl: 4rem;
+  /* Massive headers */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Glass/Blur */
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
+}
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-active);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 4px;
+}
+
+/* Buttons (Pill shaped, bold) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
+  gap: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 20px rgba(204, 255, 0, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(204, 255, 0, 0.4);
+  background: #d9ff33;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(204, 255, 0, 0.05);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn-ghost:hover {
+  color: var(--color-text-primary);
+}
+
+/* Inputs (Chunky, dark) */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-base);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: var(--color-bg-tertiary);
+  box-shadow: 0 0 0 4px rgba(204, 255, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+/* Cards (Floaty with rounded corners) */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-base);
+}
+
+.glass-container {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+
+/* Layout */
+.container {
+  max-width: 1400px;
+  /* Wider for modern feel */
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.page {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Utilities */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-center {
+  text-align: center;
+}

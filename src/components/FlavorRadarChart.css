@@ -1,0 +1,41 @@
+.flavor-radar-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+}
+
+.flavor-radar-chart.large {
+    min-height: 400px;
+}
+
+.flavor-radar-chart.small {
+    min-height: 200px;
+}
+
+/* Recharts customization */
+.recharts-wrapper {
+    cursor: default;
+}
+
+.recharts-polar-grid-concentric {
+    stroke: var(--glass-border);
+    stroke-opacity: 0.5;
+}
+
+.recharts-polar-angle-axis-tick text {
+    fill: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.recharts-polar-radius-axis-tick text {
+    fill: var(--color-text-tertiary);
+    font-size: var(--font-size-xs);
+}
+
+@media (max-width: 768px) {
+    .flavor-radar-chart.large {
+        min-height: 300px;
+    }
+}
