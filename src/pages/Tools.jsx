@@ -35,35 +35,30 @@ function Tools() {
                             className={`tab ${activeTab === 'timer' ? 'active' : ''}`}
                             onClick={() => handleTabChange('timer')}
                         >
-                            <span className="tab-icon">⏱️</span>
                             <span>Timer</span>
                         </button>
                         <button
                             className={`tab ${activeTab === 'calculator' ? 'active' : ''}`}
                             onClick={() => handleTabChange('calculator')}
                         >
-                            <span className="tab-icon">⚖️</span>
                             <span>Calculator</span>
                         </button>
                         <button
                             className={`tab ${activeTab === 'adjuster' ? 'active' : ''}`}
                             onClick={() => handleTabChange('adjuster')}
                         >
-                            <span className="tab-icon">🌡️⏱️</span>
                             <span>Time Adjuster</span>
                         </button>
                         <button
                             className={`tab ${activeTab === 'temperature' ? 'active' : ''}`}
                             onClick={() => handleTabChange('temperature')}
                         >
-                            <span className="tab-icon">🌡️</span>
                             <span>Temperature</span>
                         </button>
                         <button
                             className={`tab ${activeTab === 'meditation' ? 'active' : ''}`}
                             onClick={() => handleTabChange('meditation')}
                         >
-                            <span className="tab-icon">🧘</span>
                             <span>Meditation</span>
                         </button>
                     </div>

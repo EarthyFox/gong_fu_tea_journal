@@ -55,6 +55,8 @@
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    white-space: nowrap;
+    /* Prevent text wrapping */
 }
 
 .tab:hover {
@@ -66,10 +68,6 @@
     background: var(--color-primary);
     color: var(--color-text-inverse);
     box-shadow: 0 4px 15px rgba(204, 255, 0, 0.3);
-}
-
-.tab-icon {
-    font-size: 1.25rem;
 }
 
 /* Tool Content Area */
@@ -84,17 +82,18 @@
     .tabs {
         width: 100%;
         border-radius: var(--radius-lg);
-        justify-content: space-between;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        /* Allow scrolling on small screens if needed */
+        padding-bottom: var(--space-sm);
+        /* Space for scrollbar if any */
     }
 
     .tab {
-        flex: 1;
-        padding: var(--space-md) var(--space-sm);
+        flex: 0 0 auto;
+        /* Don't stretch */
+        padding: var(--space-md) var(--space-lg);
         justify-content: center;
-    }
-
-    .tab span:not(.tab-icon) {
-        display: none;
-        /* Icon only on mobile */
     }
 }
