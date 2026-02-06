@@ -128,4 +128,78 @@ router.delete('/:id', authenticateToken, async (req, res) => {
     }
 });
 
+// Update an entry
+router.put('/:id', authenticateToken, async (req, res) => {
+    const userId = req.user.id;
+    const entryId = req.params.id;
+    const {
+        name,
+        teaName,
+        tea_type,
+        teaType,
+        year,
+        sourcing,
+        rating,
+        notes,
+        brewing_params,
+        flavor_profile,
+        temperature, waterAmount, teaWeight, steepTimes,
+        flavorProfile
+    } = req.body;
+
+    // Normalize data (same as POST)
+    const finalName = name || teaName;
+    const finalTeaType = tea_type || teaType;
+    const finalFlavorProfile = flavor_profile || flavorProfile || {};
+
+    let finalBrewingParams = brewing_params;
+    if (!finalBrewingParams) {
+        finalBrewingParams = {
+            temperature,
+            waterAmount,
+            teaWeight,
+            steepTimes
+        };
+    }
+
+    const updatedAt = new Date().toISOString();
+
+    try {
+        const result = await db.query(`
+            UPDATE entries 
+            SET name = $1, 
+                tea_type = $2, 
+                year = $3, 
+                sourcing = $4, 
+                rating = $5, 
+                notes = $6, 
+                brewing_params = $7, 
+                flavor_profile = $8, 
+                updated_at = $9
+            WHERE id = $10 AND user_id = $11
+            RETURNING *
+        `, [
+            finalName,
+            finalTeaType,
+            year,
+            sourcing,
+            rating,
+            notes,
+            finalBrewingParams, // pg handles object -> JSONB serialization
+            finalFlavorProfile, // pg handles object -> JSONB serialization
+            updatedAt,
+            entryId,
+            userId
+        ]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Entry not found or unauthorized' });
+        }
+        res.json({ message: 'Entry updated', entry: result.rows[0] });
+    } catch (err) {
+        console.error("Update Entry Error:", err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
 export default router;

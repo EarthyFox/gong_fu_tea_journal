@@ -6,21 +6,28 @@ import Tools from './pages/Tools';
 import Journal from './pages/Journal';
 import JournalDetail from './pages/JournalDetail';
 import NewEntry from './pages/NewEntry';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <Router>
-      <JournalProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tools" element={<Tools />} />
-            <Route path="/journal" element={<Journal />} />
-            <Route path="/journal/:id" element={<JournalDetail />} />
-            <Route path="/journal/new" element={<NewEntry />} />
-          </Routes>
-        </Layout>
-      </JournalProvider>
+      <AuthProvider>
+        <JournalProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route path="/journal" element={<Journal />} />
+              <Route path="/journal/:id" element={<JournalDetail />} />
+              <Route path="/journal/new" element={<NewEntry />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </Layout>
+        </JournalProvider>
+      </AuthProvider>
     </Router>
   );
 }
