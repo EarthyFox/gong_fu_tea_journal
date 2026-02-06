@@ -26,48 +26,57 @@
     margin: 0 auto;
 }
 
-/* Floating Tab Bar */
+/* Segmented Control Tab Bar */
 .tabs {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-2xl);
+    display: inline-flex;
     background: var(--color-surface);
-    padding: var(--space-sm);
+    padding: 6px;
+    /* p-1.5 equivalent */
     border-radius: var(--radius-full);
-    border: 1px solid var(--border-color);
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    flex-wrap: wrap;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Center horizontal, but don't stretch */
+    margin-bottom: var(--space-2xl);
+    flex-wrap: nowrap;
+    /* Force single line */
+    overflow-x: auto;
+    /* Scroll on mobile if needed */
+    max-width: 100%;
 }
 
 .tab {
     background: transparent;
     border: none;
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--radius-full);
     color: var(--color-text-secondary);
-    font-family: var(--font-family-display);
+    font-family: var(--font-family-base);
+    /* Cleaner font for UI controls */
     font-weight: 600;
+    font-size: var(--font-size-sm);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease-out;
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    justify-content: center;
     white-space: nowrap;
-    /* Prevent text wrapping */
+    opacity: 0.7;
 }
 
 .tab:hover {
     color: var(--color-text-primary);
-    background: var(--color-bg-tertiary);
+    opacity: 1;
 }
 
 .tab.active {
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
-    box-shadow: 0 4px 15px rgba(204, 255, 0, 0.3);
+    background: var(--color-bg-tertiary);
+    /* Lighter gray/surface */
+    color: var(--color-primary);
+    /* Electric green text */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 15px rgba(204, 255, 0, 0.1);
+    opacity: 1;
+    transform: scale(1.02);
 }
 
 /* Tool Content Area */

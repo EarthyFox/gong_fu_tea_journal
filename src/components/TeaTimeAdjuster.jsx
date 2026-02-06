@@ -82,95 +82,101 @@ function TeaTimeAdjuster() {
             <audio ref={audioRef} src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuByvLaizsIHGS57OihUBELTKXh8LJnHgU7k9fyz3osBSh+yPDajkELF2G16OyrWBUIR6Hf8sFuIwUsgs7y2Ik3CBtnuezvpVIRC0+o4/C4aCAFOpPY8tJ9LwYpfsrw3I9CC" preload="auto" />
 
             <div className="adjuster-inputs">
-                <div className="adjuster-input-group">
-                    <label>Target Temperature</label>
-                    <div className="input-wrapper">
-                        <input
-                            type="number"
-                            value={initialTemp}
-                            onChange={(e) => setInitialTemp(e.target.value)}
-                            placeholder="200"
-                        />
-                        <span className="input-unit">°F</span>
-                    </div>
+                <div className="adjuster-intro">
+                    <p>Adjust your brew time when water cools down.</p>
                 </div>
 
-                <div className="adjuster-input-group">
-                    <label>Current Temp</label>
-                    <div className="input-wrapper">
-                        <input
-                            type="number"
-                            value={currentTemp}
-                            onChange={(e) => setCurrentTemp(e.target.value)}
-                            placeholder="180"
-                        />
-                        <span className="input-unit">°F</span>
-                    </div>
-                </div>
-
-                <div className="adjuster-input-group">
-                    <label>Target Time</label>
-                    <div className="input-wrapper">
-                        <input
-                            type="number"
-                            value={initialTime}
-                            onChange={(e) => setInitialTime(e.target.value)}
-                            placeholder="30"
-                        />
-                        <span className="input-unit">s</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="adjuster-actions">
-                <button className="btn btn-primary calculate-btn" onClick={calculateTime}>
-                    CALCULATE ADJUSTMENT
-                </button>
-            </div>
-
-            {result && (
-                <div className="adjuster-results">
-                    <div className={`result-card primary ${timerActive ? 'active-timer' : ''}`}>
-                        <h4>{timerActive ? 'Brewing...' : 'New Brewing Time'}</h4>
-                        <div className="result-value-large">
-                            {timerActive || timeLeft !== Math.ceil(result.n_time)
-                                ? formatTime(timeLeft)
-                                : <span>{result.n_time}<span className="result-unit">s</span></span>
-                            }
+                <div className="adjuster-inputs">
+                    <div className="adjuster-input-group">
+                        <label><span className="icon">🎯</span> Target Temp</label>
+                        <div className="input-wrapper">
+                            <input
+                                type="number"
+                                value={initialTemp}
+                                onChange={(e) => setInitialTemp(e.target.value)}
+                                placeholder="200"
+                            />
+                            <span className="input-unit">°F</span>
                         </div>
+                    </div>
 
-                        <div className="timer-actions">
-                            <button
-                                className={`btn ${timerActive ? 'btn-ghost' : 'btn-secondary'}`}
-                                onClick={toggleTimer}
-                                style={{ marginTop: '1rem', minWidth: '120px' }}
-                            >
-                                {timerActive ? 'PAUSE' : timeLeft === 0 ? 'FINISHED' : 'START TIMER'}
-                            </button>
-                            {(timerActive || timeLeft !== Math.ceil(result.n_time)) && (
+                    <div className="adjuster-input-group">
+                        <label><span className="icon">🌡️</span> Current Temp</label>
+                        <div className="input-wrapper">
+                            <input
+                                type="number"
+                                value={currentTemp}
+                                onChange={(e) => setCurrentTemp(e.target.value)}
+                                placeholder="180"
+                            />
+                            <span className="input-unit">°F</span>
+                        </div>
+                    </div>
+
+                    <div className="adjuster-input-group">
+                        <label><span className="icon">⏱️</span> Standard Time</label>
+                        <div className="input-wrapper">
+                            <input
+                                type="number"
+                                value={initialTime}
+                                onChange={(e) => setInitialTime(e.target.value)}
+                                placeholder="30"
+                            />
+                            <span className="input-unit">s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="adjuster-actions">
+                    <button className="btn btn-primary calculate-btn" onClick={calculateTime}>
+                        CALCULATE ADJUSTMENT
+                    </button>
+                </div>
+
+                {result && (
+                    <div className="adjuster-results">
+                        <div className={`result-card primary ${timerActive ? 'active-timer' : ''}`}>
+                            <h4>{timerActive ? 'Brewing...' : 'New Brewing Time'}</h4>
+                            <div className="result-value-large">
+                                {timerActive || timeLeft !== Math.ceil(result.n_time)
+                                    ? formatTime(timeLeft)
+                                    : <span>{result.n_time}<span className="result-unit">s</span></span>
+                                }
+                            </div>
+
+                            <div className="timer-actions">
                                 <button
-                                    className="btn btn-ghost"
-                                    onClick={resetTimer}
-                                    style={{ marginTop: '1rem' }}
+                                    className={`btn ${timerActive ? 'btn-ghost' : 'btn-secondary'}`}
+                                    onClick={toggleTimer}
+                                    style={{ marginTop: '1rem', minWidth: '120px' }}
                                 >
-                                    RESET
+                                    {timerActive ? 'PAUSE' : timeLeft === 0 ? 'FINISHED' : 'START TIMER'}
                                 </button>
-                            )}
+                                {(timerActive || timeLeft !== Math.ceil(result.n_time)) && (
+                                    <button
+                                        className="btn btn-ghost"
+                                        onClick={resetTimer}
+                                        style={{ marginTop: '1rem' }}
+                                    >
+                                        RESET
+                                    </button>
+                                )}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="secondary-stats">
-                        <div className="result-card secondary">
-                            <h4>Temp Difference</h4>
-                            <div className="result-value-medium">{result.sep_temp}°F</div>
-                        </div>
-                        <div className="result-card secondary">
-                            <h4>Time Increment</h4>
-                            <div className="result-value-medium">{result.time_inc}</div>
+                        <div className="secondary-stats">
+                            <div className="result-card secondary">
+                                <h4>Temp Difference</h4>
+                                <div className="result-value-medium">{result.sep_temp}°F</div>
+                            </div>
+                            <div className="result-card secondary">
+                                <h4>Time Increment</h4>
+                                <div className="result-value-medium">{result.time_inc}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }
