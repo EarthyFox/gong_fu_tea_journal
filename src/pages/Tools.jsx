@@ -4,6 +4,7 @@ import Timer from '../components/Timer';
 import WeightCalculator from '../components/WeightCalculator';
 import TemperatureTool from '../components/TemperatureTool';
 import Meditation from '../components/Meditation';
+import TeaTimeAdjuster from '../components/TeaTimeAdjuster';
 import './Tools.css';
 
 function Tools() {
@@ -45,6 +46,13 @@ function Tools() {
                             <span>Calculator</span>
                         </button>
                         <button
+                            className={`tab ${activeTab === 'adjuster' ? 'active' : ''}`}
+                            onClick={() => handleTabChange('adjuster')}
+                        >
+                            <span className="tab-icon">🌡️⏱️</span>
+                            <span>Time Adjuster</span>
+                        </button>
+                        <button
                             className={`tab ${activeTab === 'temperature' ? 'active' : ''}`}
                             onClick={() => handleTabChange('temperature')}
                         >
@@ -63,6 +71,7 @@ function Tools() {
                     <div className="tool-content">
                         {activeTab === 'timer' && <Timer />}
                         {activeTab === 'calculator' && <WeightCalculator />}
+                        {activeTab === 'adjuster' && <TeaTimeAdjuster />}
                         {activeTab === 'temperature' && <TemperatureTool />}
                         {activeTab === 'meditation' && <Meditation />}
                     </div>

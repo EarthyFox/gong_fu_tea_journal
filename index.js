@@ -23,7 +23,9 @@ app.get('/', (req, res) => {
 export default app;
 
 // Check if running directly (ESM pattern)
-if (process.env.STANDALONE) {
+// 1. STANDALONE flag (set in package.json)
+// 2. Fallback: If NOT running in AWS Lambda (Netlify), assume local/server mode
+if (process.env.STANDALONE || !process.env.AWS_LAMBDA_FUNCTION_NAME) {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
