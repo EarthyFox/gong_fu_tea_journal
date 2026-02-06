@@ -5,8 +5,8 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "node index.js",
-        "server": "node --watch index.js",
+        "start": "STANDALONE=true node index.js",
+        "server": "STANDALONE=true node --watch index.js",
         "client": "vite",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "build": "vite build"
