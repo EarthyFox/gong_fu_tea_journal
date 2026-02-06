@@ -7,7 +7,10 @@ const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  // Enable SSL for all remote connections (required by Neon), but disable for specific localhost cases if needed
+  ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('localhost')
+    ? false
+    : { rejectUnauthorized: false }
 });
 
 pool.on('error', (err, client) => {
