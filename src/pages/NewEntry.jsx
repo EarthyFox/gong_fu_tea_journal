@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useJournal } from '../context/JournalContext';
 import { useAuth } from '../context/AuthContext';
+import { api } from '../utils/api';
 import { flavorDimensions, defaultFlavorProfile } from '../config/flavorDimensions';
 import FlavorRadarChart from '../components/FlavorRadarChart';
 import './NewEntry.css';
@@ -29,21 +30,15 @@ function NewEntry() {
     // Load Stash
     useEffect(() => {
         const fetchTeas = async () => {
-            if (!token) return;
             try {
-                const response = await fetch('http://localhost:3001/api/teas', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setTeas(data);
-                }
+                const data = await api.get('/teas');
+                setTeas(data);
             } catch (err) {
                 console.error("Failed to load stash", err);
             }
         };
         fetchTeas();
-    }, [token]);
+    }, []);
 
     useEffect(() => {
         if (location.state && location.state.steepTimes) {

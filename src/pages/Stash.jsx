@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { api } from '../utils/api';
 import './Stash.css';
 
 const TEA_TYPES = ['Green Tea', 'Oolong', 'Black Tea', 'Raw Pu-erh', 'Ripe Pu-erh', 'White Tea', 'Herbal', 'Other'];
 
 function Stash() {
-    const { user, token } = useAuth();
+    const { user } = useAuth();
     const [teas, setTeas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -23,15 +24,11 @@ function Stash() {
 
     useEffect(() => {
         fetchTeas();
-    }, [token]);
+    }, []);
 
     const fetchTeas = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/teas', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (!response.ok) throw new Error('Failed to fetch stash');
-            const data = await response.json();
+            const data = await api.get('/teas');
             setTeas(data);
         } catch (err) {
             console.error(err);
@@ -52,41 +49,25 @@ function Stash() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/api/teas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    ...formData,
-                    weight_grams: parseFloat(formData.weight_grams) || 0
-                })
+            const newTea = await api.post('/teas', {
+                ...formData,
+                weight_grams: parseFloat(formData.weight_grams) || 0
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to add tea');
-            }
-
-            const newTea = await response.json();
             setTeas(prev => [...prev, newTea].sort((a, b) => a.name.localeCompare(b.name)));
             setShowAddForm(false);
             setFormData({ name: '', type: '', vendor: '', year: '', weight_grams: '', in_stock: true });
         } catch (err) {
             console.error(err);
-            alert(`Error adding tea: ${err.message}`);
+            const msg = err.error || err.message || 'Error adding tea';
+            alert(`Error adding tea: ${msg}`);
         }
     };
 
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to remove this tea?')) return;
         try {
-            const response = await fetch(`http://localhost:3001/api/teas/${id}`, {
-                method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (!response.ok) throw new Error('Failed to delete');
+            await api.delete(`/teas/${id}`);
             setTeas(prev => prev.filter(t => t.id !== id));
         } catch (err) {
             alert('Error deleting tea');
