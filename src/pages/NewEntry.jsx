@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useJournal } from '../context/JournalContext';
+import { useAuth } from '../context/AuthContext';
 import { flavorDimensions, defaultFlavorProfile } from '../config/flavorDimensions';
 import FlavorRadarChart from '../components/FlavorRadarChart';
 import './NewEntry.css';
@@ -11,7 +12,9 @@ function NewEntry() {
     const navigate = useNavigate();
     const location = useLocation();
     const { addEntry } = useJournal();
+    const { token } = useAuth();
 
+    const [teas, setTeas] = useState([]);
     const [formData, setFormData] = useState({
         teaName: '',
         teaType: '',
@@ -23,6 +26,25 @@ function NewEntry() {
         flavorProfile: { ...defaultFlavorProfile },
     });
 
+    // Load Stash
+    useEffect(() => {
+        const fetchTeas = async () => {
+            if (!token) return;
+            try {
+                const response = await fetch('http://localhost:3001/api/teas', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setTeas(data);
+                }
+            } catch (err) {
+                console.error("Failed to load stash", err);
+            }
+        };
+        fetchTeas();
+    }, [token]);
+
     useEffect(() => {
         if (location.state && location.state.steepTimes) {
             setFormData(prev => ({
@@ -31,6 +53,20 @@ function NewEntry() {
             }));
         }
     }, [location.state]);
+
+    const handleStashSelect = (e) => {
+        const teaId = e.target.value;
+        if (!teaId) return;
+
+        const selectedTea = teas.find(t => t.id === parseInt(teaId));
+        if (selectedTea) {
+            setFormData(prev => ({
+                ...prev,
+                teaName: selectedTea.name,
+                teaType: selectedTea.type || '',
+            }));
+        }
+    };
 
     const handleChange = (field, value) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
@@ -110,6 +146,21 @@ function NewEntry() {
                         {/* Tea Information */}
                         <div className="form-section">
                             <h2>Tea Information</h2>
+
+                            {teas.length > 0 && (
+                                <div className="form-group stash-select-group">
+                                    <label>Select from Stash</label>
+                                    <select onChange={handleStashSelect} defaultValue="">
+                                        <option value="" disabled>-- Pick from Stash --</option>
+                                        {teas.map(tea => (
+                                            <option key={tea.id} value={tea.id}>
+                                                {tea.name} ({tea.type})
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <small className="helper-text">Or type manually below</small>
+                                </div>
+                            )}
 
                             <div className="form-group">
                                 <label htmlFor="teaName">Tea Name *</label>
