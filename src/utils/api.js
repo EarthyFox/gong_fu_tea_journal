@@ -27,7 +27,18 @@ export const api = {
             headers: getHeaders(),
             body: JSON.stringify(data),
         });
-        if (!response.ok) throw response;
+
+        if (!response.ok) {
+            const text = await response.text();
+            console.error('API Error:', response.status, text);
+            try {
+                // Try parsing JSON error if possible
+                throw { json: async () => JSON.parse(text), status: response.status };
+            } catch (e) {
+                // If not JSON, throw text
+                throw new Error(`API Error ${response.status}: ${text}`);
+            }
+        }
         return response.json();
     },
 
