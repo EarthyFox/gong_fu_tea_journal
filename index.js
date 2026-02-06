@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import entryRoutes from './routes/entries.js';
+import teaRoutes from './routes/teas.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/entries', entryRoutes);
+app.use('/api/teas', teaRoutes);
 
 app.get('/', (req, res) => {
     res.send('Gong Fu Tea Journal API');

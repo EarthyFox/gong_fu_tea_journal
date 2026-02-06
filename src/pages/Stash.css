@@ -1,0 +1,146 @@
+.stash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.stash-header h1 {
+    font-size: var(--font-size-3xl);
+    color: var(--color-primary);
+}
+
+.add-tea-form-container {
+    background: var(--color-surface);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    margin-bottom: var(--space-2xl);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.add-tea-form h3 {
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-primary);
+}
+
+.add-tea-form .form-group {
+    margin-bottom: var(--space-md);
+}
+
+.add-tea-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.add-tea-form input,
+.add-tea-form select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+}
+
+.add-tea-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.stash-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}
+
+.tea-card {
+    background: var(--color-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.tea-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+}
+
+.tea-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: var(--space-md);
+}
+
+.tea-card h3 {
+    font-size: 1.2rem;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.tea-type-badge {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--glass-border);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.tea-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-delete-icon {
+    position: absolute;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    font-size: 1.1rem;
+}
+
+.btn-delete-icon:hover {
+    opacity: 1;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-tertiary);
+    padding: var(--space-2xl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--glass-border);
+}

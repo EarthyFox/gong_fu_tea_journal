@@ -41,26 +41,132 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-lg);
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    border-radius: var(--radius-xl);
-    min-width: 120px;
-    box-shadow: 0 4px 16px rgba(127, 176, 105, 0.3);
+    justify-content: center;
+    background: var(--color-surface);
+    padding: var(--space-md);
+    border-radius: var(--radius-full);
+    width: 140px;
+    /* Slight increase */
+    height: 140px;
+    border: 3px solid var(--border-color);
+    /* Standardization: 3px solid base */
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    user-select: none;
+    box-sizing: border-box;
+    /* Explicitly set box-sizing */
+}
+
+.ratio-display:active {
+    transform: scale(0.96);
+}
+
+.ratio-display.locked {
+    border-color: var(--color-primary);
+    border-width: 3px;
+    /* Explicitly 3px */
+    border-style: solid;
+    /* Explicitly solid */
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+    background: rgba(204, 255, 0, 0.05);
+    /* Subtle glowing bg */
+}
+
+.ratio-display.unlocked {
+    border-style: dashed;
+    opacity: 0.7;
+    border-width: 3px;
+    /* Explicitly 3px to match locked */
+}
+
+.ratio-content-wrapper {
+    height: 48px;
+    /* Fixed height to prevent layout shift */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.ratio-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+    opacity: 0.9;
 }
 
 .ratio-value {
     font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-inverse);
+    font-weight: 800;
+    color: var(--color-primary);
     font-family: var(--font-family-display);
+    line-height: 1;
+}
+
+.ratio-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.ratio-prefix {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-primary);
+    font-family: var(--font-family-display);
+    border-bottom: 3px solid transparent;
+    /* Match input border for alignment */
+    padding: 0;
+    line-height: normal;
+}
+
+.ratio-static-value {
+    /* Match ratio-input exactly */
+    width: 60px;
+    background: transparent;
+    border-bottom: 3px solid transparent;
+    /* Maintain spacing */
+    color: var(--color-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    font-family: var(--font-family-display);
+    text-align: center;
+    padding: 0;
+    line-height: normal;
+    /* Match input default */
+    display: inline-block;
+}
+
+.ratio-input {
+    width: 60px;
+    /* Reduced from 70px to ensure fit */
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    font-family: var(--font-family-display);
+    text-align: center;
+    padding: 0;
+    line-height: normal;
+}
+
+.ratio-input:focus {
+    outline: none;
+    background: rgba(204, 255, 0, 0.1);
+    border-radius: 4px;
 }
 
 .ratio-label {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-inverse);
-    opacity: 0.9;
-    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
 }
 
 /* Tea Presets */

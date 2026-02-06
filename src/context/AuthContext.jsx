@@ -5,14 +5,16 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Check for stored token and user on mount
-        const token = localStorage.getItem('token');
+        const storedToken = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
 
-        if (token && storedUser) {
+        if (storedToken && storedUser) {
+            setToken(storedToken);
             setUser(JSON.parse(storedUser));
         }
         setLoading(false);
@@ -23,6 +25,7 @@ export const AuthProvider = ({ children }) => {
             const data = await api.post('/auth/login', { username, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            setToken(data.token);
             setUser(data.user);
             return { success: true };
         } catch (error) {
@@ -45,6 +48,7 @@ export const AuthProvider = ({ children }) => {
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            setToken(data.token);
             setUser(data.user);
 
             return { success: true };
@@ -64,11 +68,13 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        setToken(null);
         setUser(null);
     };
 
     const value = {
         user,
+        token,
         login,
         register,
         logout,

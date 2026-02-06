@@ -48,6 +48,22 @@ const initializeSchema = async () => {
             )
         `);
 
+    // Teas table (Inventory)
+    await pool.query(`
+            CREATE TABLE IF NOT EXISTS teas (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                name TEXT NOT NULL,
+                type TEXT,
+                vendor TEXT,
+                year TEXT,
+                weight_grams REAL DEFAULT 0,
+                in_stock BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP WITH TIME ZONE
+            )
+        `);
+
     console.log("Database schema initialized");
   } catch (err) {
     console.error("Error initializing schema:", err);

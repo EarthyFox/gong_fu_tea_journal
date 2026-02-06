@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Timer.css';
 
 const TEA_PRESETS = [
@@ -10,6 +11,7 @@ const TEA_PRESETS = [
 ];
 
 function Timer() {
+    const navigate = useNavigate();
     const [currentSteep, setCurrentSteep] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -175,6 +177,17 @@ function Timer() {
                         onClick={() => setSteepHistory([])}
                     >
                         Clear History
+                    </button>
+                    <button
+                        className="btn btn-primary"
+                        style={{ marginTop: '1rem', width: '100%' }}
+                        onClick={() => {
+                            // Extract just the times
+                            const times = steepHistory.map(h => h.time.toString());
+                            navigate('/journal/new', { state: { steepTimes: times } });
+                        }}
+                    >
+                        📝 Save Session to Journal
                     </button>
                 </div>
             )}

@@ -9,6 +9,7 @@ import NewEntry from './pages/NewEntry';
 import EditEntry from './pages/EditEntry';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Stash from './pages/Stash';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/tools" element={<Tools />} />
+              <Route path="/stash" element={<Stash />} />
               <Route path="/journal" element={<Journal />} />
               <Route path="/journal/:id" element={<JournalDetail />} />
               <Route path="/journal/edit/:id" element={<EditEntry />} />

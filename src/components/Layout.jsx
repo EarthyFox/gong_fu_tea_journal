@@ -40,13 +40,22 @@ function Layout({ children }) {
                                 Tools
                             </Link>
                             {user && (
-                                <Link
-                                    to="/journal"
-                                    className={`nav-link ${isActive('/journal') ? 'active' : ''}`}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    Journal
-                                </Link>
+                                <>
+                                    <Link
+                                        to="/journal"
+                                        className={`nav-link ${isActive('/journal') ? 'active' : ''}`}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Journal
+                                    </Link>
+                                    <Link
+                                        to="/stash"
+                                        className={`nav-link ${isActive('/stash') ? 'active' : ''}`}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Stash
+                                    </Link>
+                                </>
                             )}
 
                             {!user ? (

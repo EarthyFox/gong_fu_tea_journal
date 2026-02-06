@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useJournal } from '../context/JournalContext';
 import { flavorDimensions, defaultFlavorProfile } from '../config/flavorDimensions';
 import FlavorRadarChart from '../components/FlavorRadarChart';
@@ -9,6 +9,7 @@ const TEA_TYPES = ['Green Tea', 'Oolong', 'Black Tea', 'Raw Pu-erh', 'Ripe Pu-er
 
 function NewEntry() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { addEntry } = useJournal();
 
     const [formData, setFormData] = useState({
@@ -21,6 +22,15 @@ function NewEntry() {
         notes: '',
         flavorProfile: { ...defaultFlavorProfile },
     });
+
+    useEffect(() => {
+        if (location.state && location.state.steepTimes) {
+            setFormData(prev => ({
+                ...prev,
+                steepTimes: location.state.steepTimes
+            }));
+        }
+    }, [location.state]);
 
     const handleChange = (field, value) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
