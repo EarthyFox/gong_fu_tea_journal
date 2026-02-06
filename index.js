@@ -22,8 +22,16 @@ app.get('/', (req, res) => {
 
 export default app;
 
-if (process.argv[1] === new URL(import.meta.url).pathname) {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
+// Check if running directly (ESM pattern)
+// Wrapped in try-catch because import.meta.url can be undefined/invalid in bundled serverless environments
+try {
+    const { fileURLToPath } = await import('url');
+    if (process.argv[1] === fileURLToPath(import.meta.url)) {
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    }
+} catch (error) {
+    // Silently fail if we can't determine if this is main module 
+    // (e.g. in Netlify Functions, where we don't want to listen() anyway)
 }
