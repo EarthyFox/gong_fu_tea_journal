@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send('Gong Fu Tea Journal API');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+export default app;
+
+if (process.argv[1] === new URL(import.meta.url).pathname) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
