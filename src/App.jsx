@@ -6,6 +6,7 @@ import Tools from './pages/Tools';
 import Journal from './pages/Journal';
 import JournalDetail from './pages/JournalDetail';
 import NewEntry from './pages/NewEntry';
+import EditEntry from './pages/EditEntry';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { AuthProvider } from './context/AuthContext';
@@ -21,6 +22,7 @@ function App() {
               <Route path="/tools" element={<Tools />} />
               <Route path="/journal" element={<Journal />} />
               <Route path="/journal/:id" element={<JournalDetail />} />
+              <Route path="/journal/edit/:id" element={<EditEntry />} />
               <Route path="/journal/new" element={<NewEntry />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

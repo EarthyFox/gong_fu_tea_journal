@@ -39,25 +39,22 @@ export function JournalProvider({ children }) {
 
     const updateEntry = async (id, updates) => {
         if (!user) return;
-        // API doesn't have PUT /entries/:id yet in the list I saw? 
-        // Checking routes/entries.js... I only saw GET, POST, DELETE.
-        // I should probably add PUT if it's missing or just handle local update for now if API not ready?
-        // Wait, I didn't verify if PUT route exists. Let's assume user wants basic CRUD.
-        // If backend doesn't support it, this will 404. 
-        // I will implement basic local update for now but warn/try API.
-        // Actually, looking at `routes/entries.js` earlier... it had GET, POST, DELETE. No PUT/PATCH.
-        // I should probably ADD the PUT route to backend too if I want full feature parity. 
-        // For this task, I will prioritize GET/POST/DELETE as those are definitely there.
-        // I'll stick to local state update + alert for now for update? 
-        // Or better, I'll add the PUT route to backend.
-
-        // Let's implement Delete first as I saw that.
-        console.warn("Update not fully implemented on backend yet");
-        setEntries((prev) =>
-            prev.map((entry) =>
-                entry.id === id ? { ...entry, ...updates, updatedAt: new Date().toISOString() } : entry
-            )
-        );
+        try {
+            const result = await api.put(`/entries/${id}`, updates);
+            setEntries((prev) =>
+                prev.map((entry) =>
+                    // Use 'updates' to ensure we have the frontend-friendly format (e.g. teaName vs name)
+                    // Merge result.entry only for server-generated fields if needed (like updatedAt),
+                    // but be careful not to overwrite flat fields with raw DB fields.
+                    // Safest is to just trust 'updates' for the UI and perhaps update timestamp.
+                    entry.id === id ? { ...entry, ...updates, updatedAt: result.entry.updated_at } : entry
+                )
+            );
+            return result.entry;
+        } catch (error) {
+            console.error("Failed to update entry", error);
+            throw error;
+        }
     };
 
     const deleteEntry = async (id) => {

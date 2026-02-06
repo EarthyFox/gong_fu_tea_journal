@@ -53,7 +53,10 @@ function JournalDetail() {
                         ← Back to Journal
                     </Link>
                     <div className="detail-actions">
-                        <button className="btn btn-secondary" onClick={handleDelete}>
+                        <Link to={`/journal/edit/${id}`} className="btn btn-secondary" style={{ marginRight: '1rem' }}>
+                            Edit
+                        </Link>
+                        <button className="btn btn-danger" onClick={handleDelete}>
                             Delete Entry
                         </button>
                     </div>
